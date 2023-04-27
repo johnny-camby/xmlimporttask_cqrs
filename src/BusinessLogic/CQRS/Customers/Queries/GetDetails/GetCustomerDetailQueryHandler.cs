@@ -19,12 +19,6 @@ namespace BusinessLogic.CQRS.Customers.Queries.GetDetails
             _customerRepository = customerRepository;
         }
 
-        //public string Address { get; set; }
-        //public string City { get; set; }
-        //public string Region { get; set; }
-        //public int PostalCode { get; set; }
-        //public string Country { get; set; }
-
         public async Task<CustomerDetailVm> Handle(GetCustomerDetailQueryRequest request, CancellationToken cancellationToken)
         {
             var customer = await _customerRepository.GetAsync(request.Id);
@@ -34,12 +28,7 @@ namespace BusinessLogic.CQRS.Customers.Queries.GetDetails
             customerDetail.Region = customer.FullAddress.Region;
             customerDetail.PostalCode = customer.FullAddress.PostalCode;
             customerDetail.Country = customer.FullAddress.Country;
-            //var fullAddress = customerDetail.FullAddress;
-            //if (fullAddress != null)
-            //{
-            //    throw new NotFoundException(nameof(CustomerEntity), request.Id);
-            //}
-            //customerDetail.FullAddress = _mapper.Map<FullAddressDto>(fullAddress);
+            
             return customerDetail;
         }
     }
